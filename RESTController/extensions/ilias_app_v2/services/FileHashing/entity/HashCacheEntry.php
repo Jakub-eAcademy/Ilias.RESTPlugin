@@ -37,7 +37,7 @@ final class HashCacheEntry extends ActiveRecord {
 	protected $hash = '';
 
 
-	public static function returnDbTableName() {
+	public static function returnDbTableName(): string {
 		return 'ui_uihk_rest_hashcache';
 	}
 

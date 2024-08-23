@@ -6,7 +6,6 @@
  * Since 2014
  */
 
-
 // Include core configuration UI class
 require_once('Services/Component/classes/class.ilPluginConfigGUI.php');
 require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/REST/vendor/autoload.php';
@@ -22,6 +21,10 @@ require_once 'Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/
  * @author Dirk Schaefer <schaefer at hrz.uni-marburg.de>
  * @version $Id$
  */
+/**
+ * @ilCtrl_IsCalledBy ilRESTConfigGUI: ilObjComponentSettingsGUI
+ */
+
 class ilRESTConfigGUI extends ilPluginConfigGUI {
     /**
      * Handles all commmands
@@ -31,7 +34,7 @@ class ilRESTConfigGUI extends ilPluginConfigGUI {
      *  - showContent
      * ...
      */
-    function performCommand($cmd) {
+    function performCommand($cmd): void {
         global $ilTabs;
         $ilTabs->clearTargets();
 

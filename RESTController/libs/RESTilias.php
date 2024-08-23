@@ -10,6 +10,7 @@ namespace RESTController\libs;
 // This allows us to use shortcuts instead of full quantifier
 // Requires <$ilDB>
 use ILIAS\DI\Container;
+use ILIAS\Data\Version;
 use \RESTController\core\oauth2_v2 as Auth;
 use ilLoggerFactory;
 
@@ -774,9 +775,9 @@ class ilInitialisation extends \ilInitialisation
      *
      * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file)
      */
-    public static function initGlobal($a_name, $a_class, $a_source_file = null)
+    public static function initGlobal($a_name, $a_class, $a_source_file = null): void
     {
-        return parent::initGlobal($a_name, $a_class, $a_source_file);
+        parent::initGlobal($a_name, $a_class, $a_source_file);
     }
 
 
@@ -786,9 +787,9 @@ class ilInitialisation extends \ilInitialisation
      *
      * @see \ilInitialisation::initAccessHandling()
      */
-    public static function initAccessHandling()
+    public static function initAccessHandling(): void
     {
-        return parent::initAccessHandling();
+        parent::initAccessHandling();
     }
 
     /**
@@ -797,7 +798,7 @@ class ilInitialisation extends \ilInitialisation
      *
      * @see \ilInitialisation::initIliasIniFile()
      */
-    public static function initIliasIniFile()
+    public static function initIliasIniFile(): void
     {
         if (!isset($GLOBALS['ilIliasIniFile'])) {
             parent::initIliasIniFile();
