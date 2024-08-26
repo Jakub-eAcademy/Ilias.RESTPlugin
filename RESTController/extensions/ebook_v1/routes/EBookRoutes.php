@@ -5,10 +5,10 @@ namespace RESTController\extensions\eBook;
 use RESTController\libs\RESTAuth as RESTAuth;
 use RESTController\RESTController;
 use ilCachedPlugin;
-use ilPluginAdmin;
 
 // Deactivate routes if ebook plugin is not active
-if (!ilPluginAdmin::isPluginActive('xebk')) {
+global $DIC;
+if (!$DIC['component.repository']->hasActivatedPlugin('xebk')) {
     return;
 }
 

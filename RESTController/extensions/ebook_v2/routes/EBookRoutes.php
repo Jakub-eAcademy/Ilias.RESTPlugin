@@ -16,7 +16,8 @@ use SRAG\Plugin\eBook\Synchronization\Service\SynchronizationManager;
 use SRAG\Plugin\eBook\Synchronization\Service\Mapper\v1\SynchronizationMapper;
 
 // Deactivate routes if ebook plugin is not active
-if (!ilPluginAdmin::isPluginActive('xebk')) {
+global $DIC;
+if (!$DIC['component.repository']->hasActivatedPlugin('xebk')) {
     return;
 }
 
