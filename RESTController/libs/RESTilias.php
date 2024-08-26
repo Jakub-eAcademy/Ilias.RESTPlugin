@@ -86,22 +86,8 @@ class RESTilias
         }
 
         if (!isset($_GET['client_id'])) {
-            // Create ini-handler (onces)
-            $GLOBALS["DIC"] = new \ILIAS\DI\Container();
-            $GLOBALS["DIC"]["ilLoggerFactory"] = function ($c) {
-                return ilLoggerFactory::getInstance();
-            };
-            ilInitialisation::initIliasIniFile();
-
-            /**
-             * @var Container $container
-             */
-            $container = $GLOBALS["DIC"];
-            $ilIliasIniFile = version_compare(ILIAS_VERSION_NUMERIC, "5.4.0", ">=") ?
-                $container->iliasIni() : $container->offsetGet("ilIliasIniFile");
-
             // Read default client (ContextRest does not do this since 5.2)
-            $_GET['client_id'] = $ilIliasIniFile->readVariable('clients', 'default');
+            $_GET['client_id'] = self::getIniDefaultClientId();
         }
     }
 
@@ -113,8 +99,8 @@ class RESTilias
     protected static function getIniHost()
     {
         // Create ini-handler (onces)
-        ilInitialisation::initIliasIniFile();
-        global $ilIliasIniFile;
+        $ilIliasIniFile = new \ilIniFile("./ilias.ini.php");
+        $ilIliasIniFile->read();
 
         // Return [server] -> 'http_path' variable from 'ilias.init.php'
         $http_path = $ilIliasIniFile->readVariable('server', 'http_path');
