@@ -255,7 +255,6 @@ class RESTilias
         // Create user-object if id is given
         $user = new \ilObjUser($userId);
         $DIC["ilUser"] = $user;
-        $container->offsetSet("ilUser", $user);
 
         // Initialize access-handling and attach account
         self::initAccessHandling();
