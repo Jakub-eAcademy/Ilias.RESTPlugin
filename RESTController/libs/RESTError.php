@@ -38,7 +38,7 @@ class RESTError {
     );
 
     // Log and display error?
-    if (array_key_exists($error['type'], $allowed)) {
+    if (!is_null($error) && array_key_exists($error['type'], $allowed)) {
       // Log the error
       $app->getLog()->fatal($error);
 
