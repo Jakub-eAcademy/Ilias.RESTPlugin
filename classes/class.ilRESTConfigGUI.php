@@ -63,6 +63,8 @@ class ilRESTConfigGUI extends ilPluginConfigGUI {
 
         // Required to be able to fetch rtoken on $ilCtrl
         $ilCtrl->getFormAction($this);
+        $token_repository = new \ilCtrlTokenRepository();
+        $token = $token_repository->getToken();
 
         // Create HTML layout
         $configHTML  = '<h3>'.$pl->txt("welcome_config").'</h3>';
@@ -74,7 +76,7 @@ class ilRESTConfigGUI extends ilPluginConfigGUI {
             <input type="hidden" name="userId" value="'.$ilUser->getId().'" />
             <input type="hidden" name="userName" value="'.$ilUser->getLogin().'" />
             <input type="hidden" name="sessionId" value="'.session_id().'" />
-            <input type="hidden" name="rtoken" value="'.$ilCtrl->getRequestToken().'" />
+            <input type="hidden" name="rtoken" value="'.$token->getToken().'" />
             <input type="hidden" name="restEndpoint" value="'.$inst_folder.'" />
             <input type="hidden" name="apiKey" value="apollon" />
             <input type="submit" class="btn btn-default" value="'.$pl->txt("button_adminpanel").'" />
@@ -88,7 +90,7 @@ class ilRESTConfigGUI extends ilPluginConfigGUI {
             <input type="hidden" name="userId" value="'.$ilUser->getId().'" />
             <input type="hidden" name="userName" value="'.$ilUser->getLogin().'" />
             <input type="hidden" name="sessionId" value="'.session_id().'" />
-            <input type="hidden" name="rtoken" value="'.$ilCtrl->getRequestToken().'" />
+            <input type="hidden" name="rtoken" value="'.$token->getToken().'" />
             <input type="hidden" name="restEndpoint" value="'.$inst_folder.'" />
             <input type="hidden" name="apiKey" value="apollon" />
             <input type="submit" class="btn btn-default" value="'.$pl->txt("button_checkout_app").'" />
