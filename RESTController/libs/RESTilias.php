@@ -239,14 +239,10 @@ class RESTilias
      */
     public static function loadIlUser($userId = null)
     {
-        /**
-         * @var Container $container
-         */
-        $container = $GLOBALS["DIC"];
-        if ($container->offsetExists("ilUser")) {
-            return $container->user();
+        global $DIC; 
+        if (isset($DIC["ilUser"])) {
+            return $DIC["ilUser"];
         }
-
 
         // Fetch user-id from access-token if non is given
         if (!isset($userId)) {
@@ -257,19 +253,13 @@ class RESTilias
         }
 
         // Create user-object if id is given
-
-        $user = new \ilObjUser();
-        $ilias = $container->offsetGet("ilias");
-        $user->setId($userId);
-        $user->read();
+        $user = new \ilObjUser($userId);
+        $DIC["ilUser"] = $user;
         $container->offsetSet("ilUser", $user);
-
-        if (version_compare(ILIAS_VERSION_NUMERIC, "5.3.999", "<=")) {
-            $GLOBALS["ilUser"] = $user;
-        }
 
         // Initialize access-handling and attach account
         self::initAccessHandling();
+        global $ilias;
         $ilias->account = $user;
 
         // Return $ilUser (reference)
