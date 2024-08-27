@@ -337,7 +337,7 @@ abstract class RESTDatabase {
         $type     = static::$tableKeys[$key];
         $where[]  = sprintf('%s.%s = %s.%s', static::$tableName, $key, static::$tableName, self::quote($value, $type));
       }
-      $where = implode($where, ' AND ');
+      $where = implode( ' AND ', $where);
     }
     // Use primary-key only
     else
@@ -499,7 +499,7 @@ abstract class RESTDatabase {
           $type     = static::$tableKeys[$key];
           $where[]  = sprintf('%s.%s = %s', static::$tableName, $key, self::quote($value, $type));
         }
-        $where = implode($where, ' AND ');
+        $where = implode( ' AND ',$where);
       }
       else
         $where = sprintf('%s.%s = %s', static::$tableName, static::$primaryKey, $primaryValue);
@@ -624,7 +624,7 @@ abstract class RESTDatabase {
           $type     = static::$tableKeys[$key];
           $where[]  = sprintf('%s.%s = %s', $class, $key, self::quote($value, $type));
         }
-        $where = implode($where, ' AND ');
+        $where = implode(' AND ', $where);
       }
       else
         $where = sprintf('%s.%s = %s', $class, static::$primaryKey, $primaryValue);

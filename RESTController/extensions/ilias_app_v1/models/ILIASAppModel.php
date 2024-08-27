@@ -75,11 +75,12 @@ class ILIASAppModel extends Libs\RESTModel
     public function getFileData($refId, $userId)
     {
         $file = new \ilObjFile($refId);
+        $title_info = new \SplFileInfo($file->getTitle());
         $fileName = mb_strtolower($file->getFileName());
         $fileName = preg_replace('/[^a-z0-9\-_\.]+/', '', $fileName);
 
         return array(
-            'fileExtension' => $file->getFileExtension(),
+            'fileExtension' => $title_info->getExtension(),
             'fileName' => $fileName,
             'fileSize' => $file->getFileSize(),
             'fileType' => $file->getFileType(),

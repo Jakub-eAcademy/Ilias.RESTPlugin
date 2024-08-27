@@ -184,7 +184,7 @@ final class ILIASAppModel extends Libs\RESTModel {
         try {
             // navigate to directory of source
             chdir($sourceDir);
-            $targetFilePath = ilUtil::escapeShellArg(str_repeat("../", count(explode("/", $sourceDir))) . $targetFilePath);
+            $targetFilePath = \ilShellUtil::escapeShellArg(str_repeat("../", count(explode("/", $sourceDir))) . $targetFilePath);
             $zipFileBlacklistOption = $this->buildInlineStringListForShell(
                 $this->generateFileIgnoreList($source)
             );
@@ -192,7 +192,7 @@ final class ILIASAppModel extends Libs\RESTModel {
             // zip and check result
             $zipCmd = "$zipFileBlacklistOption -r $targetFilePath $source";
             $strError = "error";
-            $result = ilUtil::execQuoted(PATH_TO_ZIP, $zipCmd);
+            $result = \ilShellUtil::execQuoted(PATH_TO_ZIP, $zipCmd);
             $result = implode(" | ", $result);
             if(strpos($result, $strError) !== false && strpos($zipCmd, $strError) === false) return false;
         } finally {
@@ -209,7 +209,7 @@ final class ILIASAppModel extends Libs\RESTModel {
         }
         $escapedArgs = [];
         foreach ($args as $arg) {
-            $escapedArgs[] = ilUtil::escapeShellArg($arg);
+            $escapedArgs[] = \ilShellUtil::escapeShellArg($arg);
         }
 
         $flatList = join(" ", $escapedArgs);
@@ -242,9 +242,9 @@ final class ILIASAppModel extends Libs\RESTModel {
     }
 
     private function isZippedSahsModule($zipPath) {
-        $escapedPath = ilUtil::escapeShellArg($zipPath);
+        $escapedPath = \ilShellUtil::escapeShellArg($zipPath);
         $zipCmd = "-Z1 $escapedPath";
-        $execResult = ilUtil::execQuoted(PATH_TO_UNZIP, $zipCmd);
+        $execResult = \ilShellUtil::execQuoted(PATH_TO_UNZIP, $zipCmd);
         $blacklistedFiles = array_filter($execResult, function ($entry) {
             return $entry === "imsmanifest.xml";
         });

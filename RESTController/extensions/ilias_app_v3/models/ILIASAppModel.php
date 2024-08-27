@@ -202,7 +202,8 @@ final class ILIASAppModel extends Libs\RESTModel {
 
     private function getFileExtensionOrEmptyString(\ilObjFile $file) {
         try {
-            return $file->getFileExtension();
+            $title_info = new \SplFileInfo($file->getTitle());
+            return $title_info->getFileExtension();
         } catch (\Exception $exception) {
             return $this->extractFileExtension($file->getFileName());
         }

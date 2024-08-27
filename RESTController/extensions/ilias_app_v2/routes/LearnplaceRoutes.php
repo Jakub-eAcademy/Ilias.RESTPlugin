@@ -32,7 +32,14 @@ $app->group('/learnplace', function() use ($app) {
 			print json_encode(new ErrorAnswer($message));
 		});
 
-		$plugins = new CallbackFilterIterator(new RecursiveIteratorIterator(new RecursiveArrayIterator(ilPluginAdmin::$active_plugins)), function($current, $key, $iterator) {
+        global $DIC;
+        $active_plugins=[];
+        foreach ($DIC["component.repository"]->getPlugins() as $plugin){
+            if($plugin->isActivated()){
+                $active_plugins[] = $plugin;
+            }
+        }
+		$plugins = new CallbackFilterIterator(new RecursiveIteratorIterator(new RecursiveArrayIterator($active_plugins)), function($current, $key, $iterator) {
 			return is_string($current) && strcmp($current, 'Learnplaces') === 0;
 		});
 
