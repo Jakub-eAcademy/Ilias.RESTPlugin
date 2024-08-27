@@ -300,6 +300,11 @@ class RESTilias
     {
         // Required for LDAP authentication (and others?), because ILIAS forces
         // updates to a users role EACH TIME credentials are validated successfully...
+        global $DIC;
+        $user = new \ilObjUser(self::getUserId($username));
+        $DIC["ilUser"] = $user;
+
+        // Initialize access-handling and attach account
         self::initAccessHandling();
 
         // Create new authentication credentials object
@@ -759,9 +764,9 @@ class ilInitialisation extends \ilInitialisation
      * Function; initGlobal($a_name, $a_class, $a_source_file)
      *  Derive from protected to public...
      *
-     * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file)
+     * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file, $destroy_existing)
      */
-    public static function initGlobal($a_name, $a_class, $a_source_file = null): void
+    public static function initGlobal($a_name, $a_class, $a_source_file = null, ?bool $destroy_existing = false): void
     {
         parent::initGlobal($a_name, $a_class, $a_source_file);
     }
