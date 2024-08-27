@@ -1,9 +1,3 @@
-# Deprecated
-Use this plugin for the ILIAS Pegasus App.
-
-For all other use cases have a look to:
-https://github.com/fluxfw/flux-ilias-rest-api
-
 # ILIAS REST Plugin
 
 This is a plugin for the [ILIAS Learning Management System](<http://www.ilias.de>), which provides a customizable REST API.
@@ -14,8 +8,8 @@ which contains changes required by the Pegasus mobile application. Only use this
 branch with the ILIAS Pegasus mobile application.
 
 ## Requirements
-* Version: ILIAS 5.3 - 7
-* PHP 5.6 or higher or PHP 7.0 - 7.4
+* Version: ILIAS 6.0 - 8
+* PHP 7.0 - 7.4
 
 ## Installation
 
@@ -24,7 +18,7 @@ branch with the ILIAS Pegasus mobile application.
 ```bash
 mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
 cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
-git clone https://github.com/hrz-unimr/Ilias.RESTPlugin.git REST
+git clone https://github.com/JN0122/Ilias.RESTPlugin.git REST
 php composer.phar install --no-dev
 ```
 
@@ -50,7 +44,7 @@ Note: Please refer to the [wiki](https://github.com/hrz-unimr/Ilias.RESTPlugin/w
 **Retrieve all available routes**
 
 ```bash
-curl -X GET https://ilias.uni-marburg.de/Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/REST/api.php/v2/util/routes
+curl -X GET https://<your_domain>/Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/REST/api.php/v2/util/routes
 ```
 
 More examples can be found in the [wiki](https://github.com/hrz-unimr/Ilias.RESTPlugin/wiki/Examples).
@@ -58,12 +52,3 @@ More examples can be found in the [wiki](https://github.com/hrz-unimr/Ilias.REST
 ## License
 This project is licensed under the GNU GPLv3 License - see the LICENSE.md file for details.
 
-## Contact
-
-fluxlabs AG
-Scheunenstrasse 19
-3400 Burgdorf  
-Switzerland
-
-[connect@fluxlabs.ch](mailto:connect@fluxlabs.ch)  
-<https://fluxlabs.ch>
