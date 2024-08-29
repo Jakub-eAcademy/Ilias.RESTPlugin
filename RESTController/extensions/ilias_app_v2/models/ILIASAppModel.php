@@ -60,7 +60,7 @@ final class ILIASAppModel extends Libs\RESTModel
          * Therefore create a stub template entry which stops these object from crashing.
          */
         if (!isset($DIC['tpl'])) {
-            $DIC['tpl'] = new \stdClass();
+            $DIC['tpl'] = new \ilGlobalTemplate("tpl.main.html", true, true);
         }
     }
 
