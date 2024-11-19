@@ -8,7 +8,7 @@ which contains changes required by the Pegasus mobile application. Only use this
 branch with the ILIAS Pegasus mobile application.
 
 ## Requirements
-* Version: ILIAS 6.0 - 8
+* Version: ILIAS 8
 * PHP 7.0 - 7.4
 
 ## Installation
@@ -18,8 +18,7 @@ branch with the ILIAS Pegasus mobile application.
 ```bash
 mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
 cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
-git clone https://github.com/JN0122/Ilias.RESTPlugin.git REST
-php composer.phar install --no-dev
+git clone https://github.com/Jakub-eAcademy/Ilias.RESTPlugin.git REST
 ```
 
 *   Open ILIAS Administration &gt; Plugins from the drop-down menu
