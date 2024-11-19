@@ -88,8 +88,9 @@ final class LearnplacePlugin {
 	 */
 	public function __construct(FileHashProvider $hashProvider) {
 		global $DIC;
-		if(!$DIC->offsetExists('ilAccess'))
-			RESTilias::loadIlUser();
+        if (!isset($DIC['ilAccess'])) {
+            RESTilias::loadIlUser();
+        }
 
 		$this->learnplaceService = PluginContainer::resolve(LearnplaceService::class);
 		$this->visitJournalService = PluginContainer::resolve(VisitJournalService::class);

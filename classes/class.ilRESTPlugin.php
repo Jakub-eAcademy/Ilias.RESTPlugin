@@ -29,7 +29,7 @@ class ilRESTPlugin extends ilUserInterfaceHookPlugin
      *
      * @return (String) Plugin name
      */
-    function getPluginName() {
+    function getPluginName(): string {
         return "REST";
     }
 
@@ -41,7 +41,7 @@ class ilRESTPlugin extends ilUserInterfaceHookPlugin
 	 *
 	 * @return bool This uninstallation routine will always return true.
 	 */
-	protected function beforeUninstall() {
+	protected function beforeUninstall(): bool {
     	global $DIC;
 
     	$db = $DIC->database();

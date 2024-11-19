@@ -7,7 +7,7 @@ This is a modified version of the original [REST plugin](https://github.com/hrz-
 which contains changes required by the IACUBUS mobile application.
 
 ## Requirements
-* Version: ILIAS 7
+* Version: ILIAS 8
 * PHP 7.0 - 7.4
 
 ## Installation
@@ -42,7 +42,7 @@ Note: Please refer to the [wiki](https://github.com/hrz-unimr/Ilias.RESTPlugin/w
 **Retrieve all available routes**
 
 ```bash
-curl -X GET https://ilias.uni-marburg.de/Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/REST/api.php/v2/util/routes
+curl -X GET https://<your_domain>/Customizing/global/plugins/Services/UIComponent/UserInterfaceHook/REST/api.php/v2/util/routes
 ```
 
 More examples can be found in the [wiki](https://github.com/hrz-unimr/Ilias.RESTPlugin/wiki/Examples).

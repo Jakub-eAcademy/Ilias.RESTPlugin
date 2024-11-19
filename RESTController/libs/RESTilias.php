@@ -10,6 +10,7 @@ namespace RESTController\libs;
 // This allows us to use shortcuts instead of full quantifier
 // Requires <$ilDB>
 use ILIAS\DI\Container;
+use ILIAS\Data\Version;
 use \RESTController\core\oauth2_v2 as Auth;
 use ilLoggerFactory;
 
@@ -85,22 +86,8 @@ class RESTilias
         }
 
         if (!isset($_GET['client_id'])) {
-            // Create ini-handler (onces)
-            $GLOBALS["DIC"] = new \ILIAS\DI\Container();
-            $GLOBALS["DIC"]["ilLoggerFactory"] = function ($c) {
-                return ilLoggerFactory::getInstance();
-            };
-            ilInitialisation::initIliasIniFile();
-
-            /**
-             * @var Container $container
-             */
-            $container = $GLOBALS["DIC"];
-            $ilIliasIniFile = version_compare(ILIAS_VERSION_NUMERIC, "5.4.0", ">=") ?
-                $container->iliasIni() : $container->offsetGet("ilIliasIniFile");
-
             // Read default client (ContextRest does not do this since 5.2)
-            $_GET['client_id'] = $ilIliasIniFile->readVariable('clients', 'default');
+            $_GET['client_id'] = self::getIniDefaultClientId();
         }
     }
 
@@ -112,8 +99,8 @@ class RESTilias
     protected static function getIniHost()
     {
         // Create ini-handler (onces)
-        ilInitialisation::initIliasIniFile();
-        global $ilIliasIniFile;
+        $ilIliasIniFile = new \ilIniFile("./ilias.ini.php");
+        $ilIliasIniFile->read();
 
         // Return [server] -> 'http_path' variable from 'ilias.init.php'
         $http_path = $ilIliasIniFile->readVariable('server', 'http_path');
@@ -252,14 +239,10 @@ class RESTilias
      */
     public static function loadIlUser($userId = null)
     {
-        /**
-         * @var Container $container
-         */
-        $container = $GLOBALS["DIC"];
-        if ($container->offsetExists("ilUser")) {
-            return $container->user();
+        global $DIC; 
+        if (isset($DIC["ilUser"])) {
+            return $DIC["ilUser"];
         }
-
 
         // Fetch user-id from access-token if non is given
         if (!isset($userId)) {
@@ -270,19 +253,12 @@ class RESTilias
         }
 
         // Create user-object if id is given
-
-        $user = new \ilObjUser();
-        $ilias = $container->offsetGet("ilias");
-        $user->setId($userId);
-        $user->read();
-        $container->offsetSet("ilUser", $user);
-
-        if (version_compare(ILIAS_VERSION_NUMERIC, "5.3.999", "<=")) {
-            $GLOBALS["ilUser"] = $user;
-        }
+        $user = new \ilObjUser($userId);
+        $DIC["ilUser"] = $user;
 
         // Initialize access-handling and attach account
         self::initAccessHandling();
+        global $ilias;
         $ilias->account = $user;
 
         // Return $ilUser (reference)
@@ -313,6 +289,11 @@ class RESTilias
     {
         // Required for LDAP authentication (and others?), because ILIAS forces
         // updates to a users role EACH TIME credentials are validated successfully...
+        global $DIC;
+        $user = new \ilObjUser(self::getUserId($username));
+        $DIC["ilUser"] = $user;
+
+        // Initialize access-handling and attach account
         self::initAccessHandling();
 
         // Create new authentication credentials object
@@ -772,11 +753,11 @@ class ilInitialisation extends \ilInitialisation
      * Function; initGlobal($a_name, $a_class, $a_source_file)
      *  Derive from protected to public...
      *
-     * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file)
+     * @see \ilInitialisation::initGlobal($a_name, $a_class, $a_source_file, $destroy_existing)
      */
-    public static function initGlobal($a_name, $a_class, $a_source_file = null)
+    public static function initGlobal($a_name, $a_class, $a_source_file = null, ?bool $destroy_existing = false): void
     {
-        return parent::initGlobal($a_name, $a_class, $a_source_file);
+        parent::initGlobal($a_name, $a_class, $a_source_file);
     }
 
 
@@ -786,9 +767,9 @@ class ilInitialisation extends \ilInitialisation
      *
      * @see \ilInitialisation::initAccessHandling()
      */
-    public static function initAccessHandling()
+    public static function initAccessHandling(): void
     {
-        return parent::initAccessHandling();
+        parent::initAccessHandling();
     }
 
     /**
@@ -797,7 +778,7 @@ class ilInitialisation extends \ilInitialisation
      *
      * @see \ilInitialisation::initIliasIniFile()
      */
-    public static function initIliasIniFile()
+    public static function initIliasIniFile(): void
     {
         if (!isset($GLOBALS['ilIliasIniFile'])) {
             parent::initIliasIniFile();

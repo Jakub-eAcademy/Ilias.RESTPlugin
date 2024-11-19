@@ -59,8 +59,8 @@ final class ILIASAppModel extends Libs\RESTModel
          *
          * Therefore create a stub template entry which stops these object from crashing.
          */
-        if (!$DIC->offsetExists('tpl')) {
-            $DIC['tpl'] = new \stdClass();
+        if (!isset($DIC['tpl'])) {
+            $DIC['tpl'] = new \ilGlobalTemplate("tpl.main.html", true, true);
         }
     }
 
@@ -173,7 +173,8 @@ final class ILIASAppModel extends Libs\RESTModel
 
     private function getFileExtensionOrEmptyString(\ilObjFile $file) {
         try {
-            return $file->getFileExtension();
+            $title_info = new \SplFileInfo($file->getTitle());
+            return $title_info->getFileExtension();
         } catch (\Exception $exception) {
             return '';
         }

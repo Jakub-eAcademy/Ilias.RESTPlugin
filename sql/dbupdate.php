@@ -532,5 +532,6 @@ require_once './Customizing/global/plugins/Services/UIComponent/UserInterfaceHoo
 
 use RESTController\extensions\ILIASApp\V2\HashCacheEntry;
 
-HashCacheEntry::installDB();
+$arBuilder = new arBuilder(new HashCacheEntry());
+$arBuilder->generateDBUpdateForInstallation();
 ?>

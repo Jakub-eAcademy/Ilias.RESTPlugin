@@ -23,14 +23,9 @@ $app->group('/v2', function () use ($app) {
         $app->get('/config', function () use ($app) {
             // Reference to $ilPluginAdmin-Object
 
-            /**
-             * @var Container $container
-             */
-            $container = $GLOBALS["DIC"];
-            $ilPluginAdmin = $container->offsetGet("ilPluginAdmin");
-
             // Fetch location of admin-panel
-            $ilPlugin = $ilPluginAdmin->getPluginObject(IL_COMP_SERVICE, "UIComponent", "uihk", "REST");
+            global $DIC;
+            $ilPlugin = $DIC['component.repository']->getPluginById('REST');
             $url = substr($ilPlugin->getDirectory(), 1) . '/apps/admin/';
 
             // Redirect to admin panel
