@@ -10,10 +10,10 @@
 
 
 $id = "rest";
-$version = "3.1.0";
+$version = "4.0.0";
 
-$ilias_min_version = "6.0.0";
+$ilias_min_version = "8.0.0";
 $ilias_max_version = "8.99";
 
-$responsible = "fluxlabs ag";
-$responsible_mail = "support@fluxlabs.ch";
+$responsible = "Jakub";
+$responsible_mail = "jakub@deepeacademy.com";
