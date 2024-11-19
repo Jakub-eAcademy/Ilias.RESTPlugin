@@ -1,11 +1,10 @@
 # ILIAS REST Plugin
 
-This is a plugin for the [ILIAS Learning Management System](<http://www.ilias.de>), which provides a customizable REST API.
+This is a plugin for the [ILIAS Learning Management System](<http://www.ilias.de>), which provides a customizable REST API. It is a fork of an open-source project developed by fluxlabs ag, located in Burgdorf, Switzerland (https://fluxlabs.ch).
 
 ## Warning
 This is a modified version of the original [REST plugin](https://github.com/hrz-unimr/Ilias.RESTPlugin) 
-which contains changes required by the Pegasus mobile application. Only use this
-branch with the ILIAS Pegasus mobile application.
+which contains changes required by the IACUBUS mobile application.
 
 ## Requirements
 * Version: ILIAS 8
@@ -21,8 +20,8 @@ cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
 git clone https://github.com/Jakub-eAcademy/Ilias.RESTPlugin.git REST
 ```
 
-*   Open ILIAS Administration &gt; Plugins from the drop-down menu
 *   Update and active REST-Plugin using the drop-down action-menu button
+*   Open ILIAS Administration &gt; Plugins from the drop-down menu
 
 ## Features:
 
@@ -50,4 +49,3 @@ More examples can be found in the [wiki](https://github.com/hrz-unimr/Ilias.REST
 
 ## License
 This project is licensed under the GNU GPLv3 License - see the LICENSE.md file for details.
-
