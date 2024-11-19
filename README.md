@@ -18,12 +18,8 @@ which contains changes required by the IACUBUS mobile application.
 mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
 cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
 git clone https://github.com/Jakub-eAcademy/Ilias.RESTPlugin.git REST
-composer install --no-dev
 ```
-```
-cd <ILIAS_ROOT_PATH>
-composer-install --no-dev
-```
+
 *   Update and active REST-Plugin using the drop-down action-menu button
 *   Open ILIAS Administration &gt; Plugins from the drop-down menu
 
