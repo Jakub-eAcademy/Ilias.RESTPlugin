@@ -1,21 +1,14 @@
-# Deprecated
-Use this plugin for the ILIAS Pegasus App.
-
-For all other use cases have a look to:
-https://github.com/fluxfw/flux-ilias-rest-api
-
 # ILIAS REST Plugin
 
-This is a plugin for the [ILIAS Learning Management System](<http://www.ilias.de>), which provides a customizable REST API.
+This is a plugin for the [ILIAS Learning Management System](<http://www.ilias.de>), which provides a customizable REST API. It is a fork of an open-source project developed by fluxlabs ag, located in Burgdorf, Switzerland (https://fluxlabs.ch).
 
 ## Warning
 This is a modified version of the original [REST plugin](https://github.com/hrz-unimr/Ilias.RESTPlugin) 
-which contains changes required by the Pegasus mobile application. Only use this
-branch with the ILIAS Pegasus mobile application.
+which contains changes required by the IACUBUS mobile application.
 
 ## Requirements
-* Version: ILIAS 5.3 - 7
-* PHP 5.6 or higher or PHP 7.0 - 7.4
+* Version: ILIAS 7
+* PHP 7.0 - 7.4
 
 ## Installation
 
@@ -24,12 +17,15 @@ branch with the ILIAS Pegasus mobile application.
 ```bash
 mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
 cd Customizing/global/plugins/Services/UIComponent/UserInterfaceHook
-git clone https://github.com/hrz-unimr/Ilias.RESTPlugin.git REST
-php composer.phar install --no-dev
+git clone https://github.com/Jakub-eAcademy/Ilias.RESTPlugin.git REST
+composer install --no-dev
 ```
-
-*   Open ILIAS Administration &gt; Plugins from the drop-down menu
+```
+cd <ILIAS_ROOT_PATH>
+composer-install --no-dev
+```
 *   Update and active REST-Plugin using the drop-down action-menu button
+*   Open ILIAS Administration &gt; Plugins from the drop-down menu
 
 ## Features:
 
@@ -57,13 +53,3 @@ More examples can be found in the [wiki](https://github.com/hrz-unimr/Ilias.REST
 
 ## License
 This project is licensed under the GNU GPLv3 License - see the LICENSE.md file for details.
-
-## Contact
-
-fluxlabs AG
-Scheunenstrasse 19
-3400 Burgdorf  
-Switzerland
-
-[connect@fluxlabs.ch](mailto:connect@fluxlabs.ch)  
-<https://fluxlabs.ch>
